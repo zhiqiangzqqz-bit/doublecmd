@@ -71,11 +71,11 @@ type
 
   TEVERYTHING_IPC_QUERYW = record
     // the window that will receive the new results.
-    reply_hwnd: HWND;
+    reply_hwnd: DWORD;
 
     // the value to set the dwData member in the COPYDATASTRUCT struct
     // sent by Everything when the query is complete.
-    reply_copydata_message: ULONG_PTR;
+    reply_copydata_message: DWORD;
 
     // search flags (see EVERYTHING_MATCHCASE | EVERYTHING_MATCHWHOLEWORD | EVERYTHING_MATCHPATH)
     search_flags: DWORD;
@@ -177,7 +177,7 @@ begin
       query^.max_results := num;
       query^.reply_copydata_message := COPYDATA_IPCTEST_QUERYCOMPLETEW;
       query^.search_flags := search_flags;
-      query^.reply_hwnd := hwnd;
+      query^.reply_hwnd := DWORD(hwnd);
       StrPLCopy(@query^.search_string, search_string, len);
 
       cds.cbData := size;
